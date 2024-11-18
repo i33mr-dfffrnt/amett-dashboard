@@ -65,7 +65,7 @@ const ModelForm = () => {
         formData.append("type", type);
         formData.append("manufacturer", manufacturer);
 
-        await amettAPI.post(`/equipment-Equipment`, formData, {
+        await amettAPI.post(`/equipment-models`, formData, {
           headers: { "Content-type": "multipart/form-date" },
         });
 
