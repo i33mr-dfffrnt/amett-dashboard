@@ -12,8 +12,24 @@ import Footer from "./components/footer";
 import PrivateRoute from "./components/privateRoute";
 
 import AdminHome from "./pages/adminDashboard/adminHome";
-import ManageModels from "./pages/adminDashboard/manageModels";
-import ModelForm from "./pages/adminDashboard/modelForm";
+
+/* Equipment (Product)*/
+import ManageEquipment from "./pages/adminDashboard/manageEquipment";
+import ModalForm from "./pages/adminDashboard/modelForm";
+import UpdateModel from "./pages/adminDashboard/updateModel";
+
+/* Equipment Manufacturers  (Product Manufacturer)*/
+import ManageEquipmentManufacturers from "./pages/adminDashboard/manageManu";
+import ManufacturerForm from "./pages/adminDashboard/manufacturerForm";
+import UpdateManufacturer from "./pages/adminDashboard/updateManufacturer";
+
+/* Equipment Types (Product Collection) */
+import ManageEquipmentTypes from "./pages/adminDashboard/manageEquipmentTypes";
+import TypeForm from "./pages/adminDashboard/typeForm";
+import UpdateType from "./pages/adminDashboard/updateType";
+
+
+/*Other  */
 import ServiceForm from "./pages/serviceForm";
 import ServiceStatus from "./pages/serviceStatus";
 
@@ -24,16 +40,11 @@ import EquipManufacturersPage from "./pages/equipManufacturersPage";
 import ManageAuctions from "./pages/adminDashboard/manageAuctions";
 import ManageBids from "./pages/adminDashboard/manageBids";
 import ManageQuoteRequests from "./pages/adminDashboard/manageQuoteRequests";
-import UpdateModel from "./pages/adminDashboard/updateModel";
-import ManageManufacturers from "./pages/adminDashboard/manageManu";
-import ManageTypes from "./pages/adminDashboard/manageTypes";
-import ManufacturerForm from "./pages/adminDashboard/manufacturerForm";
-import TypeForm from "./pages/adminDashboard/typeForm";
+
 import ManageAdmins from "./pages/adminDashboard/manageAdmins";
 import AdminLogin from "./pages/adminDashboard/adminLogin";
 import UpdateAuction from "./pages/adminDashboard/updateAuction";
-import UpdateManufacturer from "./pages/adminDashboard/updateManufacturer";
-import UpdateType from "./pages/adminDashboard/updateType";
+
 import NotFoundPage from "./pages/notFoundPage";
 import AdminNotFoundPage from "./pages/adminDashboard/adminNotFoundPage";
 
@@ -56,69 +67,69 @@ function App() {
 
         {/* Admin pages protected*/}
 
-        <Route path="/" element={<PrivateRoute />}>
+        <Route path="/" >
           <Route path="/admin-dashboard" element={<AdminHome />} />
         </Route>
 
-        <Route path="/" element={<PrivateRoute />}>
-          <Route path="/admin-dashboard/manage-models" element={<ManageModels />} />
+        <Route path="/">
+          <Route path="/admin-dashboard/manage-equipment" element={<ManageEquipment />} />
         </Route>
 
-        <Route path="/" element={<PrivateRoute />}>
-          <Route path="/admin-dashboard/create-model" element={<ModelForm />} />
+        <Route path="/">
+          <Route path="/admin-dashboard/create-model" element={<ModalForm />} />
         </Route>
 
-        <Route path="/" element={<PrivateRoute />}>
+        <Route path="/">
           <Route path="/admin-dashboard/update-model/:modelId" element={<UpdateModel />} />
         </Route>
 
-        <Route path="/" element={<PrivateRoute />}>
+        <Route path="/">
           <Route path="/admin-dashboard/manage-auctions" element={<ManageAuctions />} />
         </Route>
 
-        <Route path="/" element={<PrivateRoute />}>
+        <Route path="/">
           <Route path="/admin-dashboard/update-auction/:auctionId" element={<UpdateAuction />} />
         </Route>
 
-        <Route path="/" element={<PrivateRoute />}>
+        <Route path="/">
           <Route path="/admin-dashboard/manage-bids" element={<ManageBids />} />
         </Route>
 
-        <Route path="/" element={<PrivateRoute />}>
+        <Route path="/">
           <Route path="/admin-dashboard/manage-quote-requests" element={<ManageQuoteRequests />} />
         </Route>
 
-        <Route path="/" element={<PrivateRoute />}>
-          <Route path="/admin-dashboard/manage-manufacturers" element={<ManageManufacturers />} />
+        <Route path="/">
+          <Route path="/admin-dashboard/manage-equipment-manufacturers" element={<ManageEquipmentManufacturers />} />
         </Route>
 
-        <Route path="/" element={<PrivateRoute />}>
-          <Route path="/admin-dashboard/manage-types" element={<ManageTypes />} />
+        <Route path="/">
+          <Route path="/admin-dashboard/manage-equipment-types" element={<ManageEquipmentTypes />} />
         </Route>
 
-        <Route path="/" element={<PrivateRoute />}>
+        <Route path="/">
           <Route path="/admin-dashboard/create-manufacturer" element={<ManufacturerForm />} />
         </Route>
 
-        <Route path="/" element={<PrivateRoute />}>
+        <Route path="/">
           <Route
             path="/admin-dashboard/update-manufacturer/:manufacturerId"
             element={<UpdateManufacturer />}
           />
         </Route>
 
-        <Route path="/" element={<PrivateRoute />}>
-          <Route path="/admin-dashboard/create-type" element={<TypeForm />} />
+        <Route path="/">
+          <Route path="/admin-dashboard/create-equipment-type" element={<TypeForm />} />
         </Route>
 
-        <Route path="/" element={<PrivateRoute />}>
-          <Route path="/admin-dashboard/update-type/:typeId" element={<UpdateType />} />
+        <Route path="/">
+          <Route path="/admin-dashboard/update-equipment-type/:typeId" element={<UpdateType />} />
         </Route>
 
-        <Route path="/" element={<PrivateRoute />}>
+        <Route path="/">
           <Route path="/admin-dashboard/manage-admins" element={<ManageAdmins />} />
         </Route>
-        <Route path="/" element={<PrivateRoute />}>
+        <Route path="/">
           <Route path="/admin-dashboard/404" element={<AdminNotFoundPage />} />
         </Route>
 

@@ -12,7 +12,7 @@ const ModelForm = () => {
   const [typeList, setTypeList] = useState([]);
   const [manuList, setManuList] = useState([]);
 
-  const [modelName, setModelName] = useState("");
+  const [EquipmentName, setEquipmentName] = useState("");
   const [type, setType] = useState("");
   const [manufacturer, setManufacturer] = useState("");
   const [description, setDescription] = useState("");
@@ -25,18 +25,18 @@ const ModelForm = () => {
   const [errorMessage, setErrorMessage] = useState("");
 
   const validateForm = () => {
-    if (modelName.trim() === "") {
-      setErrorMessage("Please input model name");
+    if (EquipmentName.trim() === "") {
+      setErrorMessage("Please input Equipment name");
       return false;
     } else if (type.trim() === "") {
-      setErrorMessage("Please choose a model type ");
+      setErrorMessage("Please choose a Equipment type ");
       return false;
     } else if (manufacturer.trim() === "") {
-      setErrorMessage("Please choose a model manufacturer ");
+      setErrorMessage("Please choose a Equipment manufacturer ");
 
       return false;
     } else if (description.trim() === "") {
-      setErrorMessage("Please input model description");
+      setErrorMessage("Please input Equipment description");
       return false;
     } else if (manufacturer.trim() === "") {
       setErrorMessage("Please select a manufacturer");
@@ -60,12 +60,12 @@ const ModelForm = () => {
 
         const formData = new FormData();
         formData.append("image", file);
-        formData.append("name", modelName);
+        formData.append("name", EquipmentName);
         formData.append("description", description);
         formData.append("type", type);
         formData.append("manufacturer", manufacturer);
 
-        await amettAPI.post(`/equipment-models`, formData, {
+        await amettAPI.post(`/equipment-Equipment`, formData, {
           headers: { "Content-type": "multipart/form-date" },
         });
 
@@ -139,27 +139,27 @@ const ModelForm = () => {
       ) : null}
       {isSuccessAlertShown ? (
         <SuccessNotification
-          msg={"Success! Your new model has been created"}
+          msg={"Success! Your new Equipment has been created"}
           setSuccessAlertShown={() => setSuccessAlertShown(false)}
         />
       ) : null}
       <div className="col-span-4 mt-10 ">
         <h2 className="text-xl sm:text-4xl mb-5 mt-2 playfairDisplay-font font-bold">
-          Add New Model
+          Add New Equipment
         </h2>
         <h3 className=" text-lg sm:text-xl playfairDisplay-font flex  flex-row justify-start mr-3 mt-4 bg-baseBlue text-white p-1 font-bold">
-          Model Details
+          Equipment Details
         </h3>
         <form className="grid grid-cols-5  gap-4 text-md lg:text-xl playfairDisplay-font  mr-3  bg-baseGray px-10 lg:px-20 xl:px-32 py-10">
-          <h5 className="">Model Name*</h5>
+          <h5 className="">Equipment Name*</h5>
           <input
             type="text"
             name="name"
             className="border border-gray-300 rounded-sm col-span-4 pl-1"
             onChange={(event) => {
-              setModelName(event.target.value);
+              setEquipmentName(event.target.value);
             }}
-            value={modelName}
+            value={EquipmentName}
           />
           <h5 className="">Type*</h5>
           <select
@@ -180,7 +180,7 @@ const ModelForm = () => {
           </select>
 
           <Link
-            to={`/admin-dashboard/create-type`}
+            to={`/admin-dashboard/create-equipment-type`}
             className="flex items-center justify-center rounded-sm border border-gray-300  bg-white py-1 px-4  shadow-lg"
           >
             New Type
@@ -218,7 +218,7 @@ const ModelForm = () => {
             }}
             value={description}
           />
-          <h5 className="">Model Photo*</h5>
+          <h5 className="">Equipment Photo*</h5>
           <input type="file" accept="image/*" onChange={onFileChange} />
 
           <div className="col-span-5 ">
@@ -228,9 +228,9 @@ const ModelForm = () => {
                   Modify image
                   <CustomCropper image={imageSrc} showCroppedImage={showCroppedImage} />
                 </div>
-                <div className="w-full rounded-lg  product-carousel">
+                <div className="w-full rounded-lg  Equipment-carousel">
                   How it will look like:
-                  <div className="product-carousel-slide rounded-lg">
+                  <div className="Equipment-carousel-slide rounded-lg">
                     <img
                       src={previewUri.url}
                       alt=".."
@@ -251,7 +251,7 @@ const ModelForm = () => {
               className="flex items-center justify-center rounded-lg border border-gray-300 py-4 px-6 font-bold bg-baseGreen text-white  text-2xl shadow-lg"
             >
               {!isLoading ? (
-                "Save Model"
+                "Save Equipment"
               ) : (
                 <div role="status">
                   <svg

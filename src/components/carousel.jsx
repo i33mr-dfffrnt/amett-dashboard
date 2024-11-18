@@ -27,7 +27,7 @@ const CustomCarousel = () => {
               Top Sellers
             </h2>
             <h3 className="mb-10 sm:text-xl	rubik-font text-white ">
-              Check out our most sold items and products
+              Check out our most sold items and equipment
             </h3>
             <button className="bg-baseGreen hover:bg-secondGreen text-white rubik-font py-2 px-4  rounded shadow sm:text-lg">
               View Listings
@@ -47,7 +47,7 @@ const CustomCarousel = () => {
               Top Sellers
             </h2>
             <h3 className="mb-10 sm:text-xl	rubik-font text-white ">
-              Check out our most sold items and products
+              Check out our most sold items and equipment
             </h3>
             <button className="bg-baseGreen hover:bg-secondGreen text-white rubik-font py-2 px-4  rounded shadow sm:text-lg">
               View Listings

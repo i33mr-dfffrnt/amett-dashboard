@@ -28,6 +28,7 @@ const UpdateType = () => {
       try {
         const response = await amettAPI.get(`/equipment-types/${typeId}`);
         setType(response.data.data.equipmentType);
+        console.log("response: ", response)
         setTypeName(response.data.data.equipmentType.name);
       } catch (error) {
         navigate("/admin-dashboard/404", { replace: true });

@@ -7,8 +7,8 @@ import ConfirmModal from "../../components/confirmModal";
 import { Link } from "react-router-dom";
 import amettAPI from "../../api/amettAPI";
 
-const ManageModels = () => {
-  const [modelsList, setModelsList] = useState([]);
+const ManageEquipmentTypes = () => {
+  const [typesList, setTypesList] = useState([]);
   const [confirmModalState, setConfirmModalState] = useState(false);
   const [deleteItemName, setDeleteItemName] = useState("");
   const [deleteItemCount, setDeleteItemCount] = useState(0);
@@ -22,18 +22,19 @@ const ManageModels = () => {
   const [modalSuccessMsg, setModalSuccessMsg] = useState("");
   const [modalErrMsg, setModalErrMsg] = useState("");
 
-  const sortList = ["Newest", "Oldest", "Model A-Z", "Manufacturer A-Z", "Type A-Z"];
+  const sortList = ["Newest", "Oldest", "Type A-Z"];
   const [filteredList, setFilteredList] = new useState([]);
 
   useEffect(() => {
-    const fetchModels = async () => {
+    const fetchTypes = async () => {
       try {
-        const response = await amettAPI.get(`/equipment-models`);
-        setModelsList(response.data.data.equipmentModels);
-        setFilteredList(response.data.data.equipmentModels);
+        const response = await amettAPI.get(`/equipment-types`);
+        console.log(response);
+        setTypesList(response.data.data.equipmentTypes);
+        setFilteredList(response.data.data.equipmentTypes);
       } catch (error) {}
     };
-    fetchModels();
+    fetchTypes();
     setIsCheck([]);
   }, [updateList]);
 
@@ -57,7 +58,7 @@ const ManageModels = () => {
     }
   };
 
-  const sortModels = (method) => {
+  const sortTypes = (method) => {
     if (method === "Newest") {
       setFilteredList(
         [...filteredList].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
@@ -66,18 +67,14 @@ const ManageModels = () => {
       setFilteredList(
         [...filteredList].sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt))
       );
-    } else if (method === "Model A-Z") {
-      setFilteredList([...filteredList].sort((a, b) => a.name.localeCompare(b.name)));
-    } else if (method === "Manufacturer A-Z") {
-      setFilteredList([...filteredList].sort((a, b) => a.manufacturer.name.localeCompare(b.name)));
     } else if (method === "Type A-Z") {
-      setFilteredList([...filteredList].sort((a, b) => a.type.name.localeCompare(b.name)));
+      setFilteredList([...filteredList].sort((a, b) => a.name.localeCompare(b.name)));
     }
   };
 
   const filterBySearch = (event) => {
     const query = event.target.value;
-    var updatedList = [...modelsList];
+    var updatedList = [...typesList];
 
     updatedList = updatedList.filter((item) => {
       return item.name.toLowerCase().indexOf(query.toLowerCase()) !== -1;
@@ -86,7 +83,7 @@ const ManageModels = () => {
     setFilteredList(updatedList);
   };
 
-  const models = filteredList.map((el) => {
+  const types = filteredList.map((el) => {
     return (
       <tr className="bg-white border-b hover:bg-gray-50" key={el._id}>
         <td className="w-4 p-4">
@@ -100,20 +97,9 @@ const ManageModels = () => {
             />
           </div>
         </td>
-        <th scope="row" className="px-6 py-4 font-medium text-gray-900  max-w-sm ellipsis">
+        <th scope="row" className="px-6 py-4 font-medium text-gray-900 max-w-sm ellipsis ">
           {el.name}
         </th>
-        <td className=" px-6 py-4 max-w-sm ellipsis">{el.type.name}</td>
-        <td className="px-6 py-4 max-w-sm ellipsis">{el.manufacturer.name}</td>
-        <td className="px-6 py-4">{el.status}</td>
-        <td className="px-6 py-4">
-          <Link
-            className="text-dodger underline"
-            to={{ pathname: "/admin-dashboard/manage-quote-requests", search: `query=${el._id}` }}
-          >
-            Requests List
-          </Link>
-        </td>
 
         <td className="flex items-center justify-center px-6 py-4 space-x-3 ">
           <button
@@ -122,10 +108,10 @@ const ManageModels = () => {
               setDeleteItemName(el.name);
               setConfirmModalState(true);
               setSubmitFunction(() => () => {
-                return amettAPI.delete(`/equipment-models/${el._id}`);
+                return amettAPI.delete(`/equipment-types/${el._id}`);
               });
               setModalMsg(
-                `Are you sure you want to delete ${el.name}? All associated quote requests will be deleted as well`
+                `Are you sure you want to delete ${el.name}? All associated models and their quote requests will be deleted as well`
               );
               setModalSuccessMsg(`${el.name} was deleted successfully!`);
               setModalErrMsg(`Something went wrong! Please try again later`);
@@ -135,7 +121,7 @@ const ManageModels = () => {
             <IoTrash size={20} color="#FA0562" />
           </button>
           <Link
-            to={`/admin-dashboard/update-model/${el._id}`}
+            to={`/admin-dashboard/update-equipment-type/${el._id}`}
             className=" flex w-30 text-sm items-center justify-center rounded-3xl border border-transparent  drop-shadow-lg bg-white py-1 px-1  font-semibold text-white "
           >
             <IoPencil size={20} color="#1CABFF" />
@@ -171,30 +157,19 @@ const ManageModels = () => {
 
       <div className="col-span-4 mt-10 ">
         <h2 className="text-xl sm:text-4xl mb-5 mt-2 playfairDisplay-font font-bold">
-          Manage Models
+          Equipment Collections
         </h2>
         <div className="flex flex-row justify-end gap-3 my-4">
           <h3 className="flex w-30 text-sm items-center justify-center rounded-sm border border-transparent  py-1 px-4  font-semibold ">
-            {`${filteredList.length} models were found`}
+            {`${filteredList.length} types were found`}
           </h3>
+
           <Link
-            to={"/admin-dashboard/manage-manufacturers"}
-            className="flex items-center justify-center rounded-sm border border-gray-300  bg-white py-1 px-4  shadow-lg"
-          >
-            Manage Manufacturers
-          </Link>
-          <Link
-            to={"/admin-dashboard/manage-types"}
-            className="flex items-center justify-center rounded-sm border border-gray-300  bg-white py-1 px-4  shadow-lg"
-          >
-            Manage Types
-          </Link>
-          <Link
-            to={`/admin-dashboard/create-model`}
+            to={`/admin-dashboard/create-equipment-type`}
             className=" flex w-30 text-sm items-center justify-center rounded-sm border border-transparent bg-dodger py-1 px-4  font-semibold text-white hover:bg-dodgerDark focus:outline-none"
           >
             <IoAddCircleOutline size={30} className="mr-2" />
-            Add Model
+            Add Collection
           </Link>
 
           <button
@@ -204,12 +179,12 @@ const ManageModels = () => {
               setDeleteItemName("");
 
               setModalMsg(
-                `Are you sure you want to delete ${isCheck.length} items? All associated quote requests will be deleted as well`
+                `Are you sure you want to delete ${isCheck.length} items? All associated models and their quote requests will be deleted as well`
               );
               setModalSuccessMsg(`${isCheck.length} items were deleted successfully!`);
               setModalErrMsg(`Something went wrong! Please try again later`);
               setSubmitFunction(() => () => {
-                return amettAPI.delete(`/equipment-models`, {
+                return amettAPI.delete(`/equipment-types`, {
                   data: { deleteArray: isCheck },
                 });
               });
@@ -221,13 +196,13 @@ const ManageModels = () => {
           >
             <IoTrash size={30} />
           </button>
-          <SortDropdown sortList={sortList} sort={sortModels} />
+          <SortDropdown sortList={sortList} sort={sortTypes} />
           <div className="relative text-gray-600 ">
             <input
               className="border-2 border-gray-300 bg-white h-10 pl-2 pr-8 rounded-sm text-sm focus:outline-none  w-full"
               type="search"
               name="search"
-              placeholder="Search for models"
+              placeholder="Search for types"
               onChange={filterBySearch}
             />
             <button type="submit" className="absolute right-0 top-0 mt-3 mr-2">
@@ -251,26 +226,15 @@ const ManageModels = () => {
                   </div>
                 </th>
                 <th scope="col" className="px-6 py-3">
-                  model name
+                  type name
                 </th>
-                <th scope="col" className="px-6 py-3">
-                  type
-                </th>
-                <th scope="col" className="px-6 py-3">
-                  manufacturer
-                </th>
-                <th scope="col" className="px-6 py-3">
-                  status
-                </th>
-                <th scope="col" className="px-6 py-3">
-                  Quote Requests
-                </th>
+
                 <th scope="col" className="px-6 py-3">
                   Action
                 </th>
               </tr>
             </thead>
-            <tbody>{models}</tbody>
+            <tbody>{types}</tbody>
           </table>
         </div>
       </div>
@@ -278,4 +242,4 @@ const ManageModels = () => {
   );
 };
 
-export default ManageModels;
+export default ManageEquipmentTypes;

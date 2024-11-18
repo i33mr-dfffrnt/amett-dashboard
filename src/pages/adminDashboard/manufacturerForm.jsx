@@ -36,13 +36,17 @@ const ManufacturerForm = () => {
         var file = new File([previewUri.file], "image.jpg", { type: previewUri.file.type });
 
         const formData = new FormData();
+        
         formData.append("image", file);
         formData.append("name", manufacturerName);
 
-        await amettAPI.post(`/equipment-manufacturers`, formData, {
-          headers: { "Content-type": "multipart/form-date" },
+        console.log(formData)
+        const response = await amettAPI.post(`/equipment-manufacturers`, formData, {
+          headers: { "Content-Type": "multipart/form-data" },
         });
 
+
+        console.log(response)
         setIsLoading(false);
         setSuccessAlertShown(true);
       } catch (error) {
