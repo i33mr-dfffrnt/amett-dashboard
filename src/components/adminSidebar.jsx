@@ -25,11 +25,11 @@ const AdminSidebar = () => {
             </li>
             <li className="rounded-sm bg-white">
               <Link
-                to={"/admin-dashboard/manage-models"}
+                to={"/admin-dashboard/manage-equipment"}
                 className="flex items-center p-2 space-x-3 rounded-md"
               >
                 <TbDeviceHeartMonitor size={24} />
-                <span className="font-semibold oswald-font text-xl ">Manage Models</span>
+                <span className="font-semibold oswald-font text-xl ">Equipment</span>
               </Link>
             </li>
             <li className="rounded-sm bg-white">

@@ -19,7 +19,7 @@ const TypeForm = () => {
 
   const validateForm = () => {
     if (typeName.trim() === "") {
-      setErrorMessage("Please input type name");
+      setErrorMessage("Please input collection name");
       return false;
     } else if (!imageSrc) {
       setErrorMessage("Please upload an image");
@@ -97,13 +97,13 @@ const TypeForm = () => {
       ) : null}
       <div className="col-span-4 mt-10 ">
         <h2 className="text-xl sm:text-4xl mb-5 mt-2 playfairDisplay-font font-bold">
-          Add New Type
+          Add New Collection
         </h2>
         <h3 className=" text-lg sm:text-xl playfairDisplay-font flex  flex-row justify-start mr-3 mt-4 bg-baseBlue text-white p-1 font-bold">
-          Type Details
+          Collection Details
         </h3>
         <form className="grid grid-cols-5  gap-4 text-md lg:text-xl playfairDisplay-font  mr-3  bg-baseGray px-10 lg:px-20 xl:px-32 py-10">
-          <h5 className="">Type Name*</h5>
+          <h5 className="">Collection Name*</h5>
           <input
             type="text"
             name="name"
@@ -114,7 +114,7 @@ const TypeForm = () => {
             value={typeName}
           />
 
-          <h5 className="">Type Photo*</h5>
+          <h5 className="">Collection Photo*</h5>
           <input type="file" accept="image/*" onChange={onFileChange} />
 
           <div className="col-span-5 ">
@@ -147,7 +147,7 @@ const TypeForm = () => {
               className="flex items-center justify-center rounded-lg border border-gray-300 py-4 px-6 font-bold bg-baseGreen text-white  text-2xl shadow-lg"
             >
               {!isLoading ? (
-                "Save Type"
+                "Save Collection"
               ) : (
                 <div role="status">
                   <svg

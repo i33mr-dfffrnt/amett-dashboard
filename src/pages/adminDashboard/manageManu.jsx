@@ -7,7 +7,7 @@ import ConfirmModal from "../../components/confirmModal";
 import { Link } from "react-router-dom";
 import amettAPI from "../../api/amettAPI";
 
-const ManageManufacturers = () => {
+const ManageEquipmentManufacturers = () => {
   const [manufacturersList, setManufacturersList] = useState([]);
   const [confirmModalState, setConfirmModalState] = useState(false);
   const [deleteItemName, setDeleteItemName] = useState("");
@@ -29,6 +29,7 @@ const ManageManufacturers = () => {
     const fetchManufacturers = async () => {
       try {
         const response = await amettAPI.get(`/equipment-manufacturers`);
+        console.log(response)
         setManufacturersList(response.data.data.equipmentManufacturers);
         setFilteredList(response.data.data.equipmentManufacturers);
       } catch (error) {}
@@ -156,7 +157,7 @@ const ManageManufacturers = () => {
 
       <div className="col-span-4 mt-10 ">
         <h2 className="text-xl sm:text-4xl mb-5 mt-2 playfairDisplay-font font-bold">
-          Manage Model Manufacturers
+          Equipment Manufacturers
         </h2>
         <div className="flex flex-row justify-end gap-3 my-4">
           <h3 className="flex w-30 text-sm items-center justify-center rounded-sm border border-transparent  py-1 px-4  font-semibold ">
@@ -241,4 +242,4 @@ const ManageManufacturers = () => {
   );
 };
 
-export default ManageManufacturers;
+export default ManageEquipmentManufacturers;

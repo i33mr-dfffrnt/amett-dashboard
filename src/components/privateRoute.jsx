@@ -4,7 +4,7 @@ import isAuth from "../utils/auth";
 
 const PrivateRoute = () => {
   const [isLoading, setIsLoading] = useState(true);
-  const [isValid, setIsValid] = useState(null);
+  const [isValid, setIsValid] = useState(true);
   // const auth = isAuth(); // determine if authorized, from context or however you're doing it
   // console.log(auth);
   // If authorized, return an outlet that will render child elements
