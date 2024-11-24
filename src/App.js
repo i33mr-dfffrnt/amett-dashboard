@@ -15,8 +15,11 @@ import AdminHome from "./pages/adminDashboard/adminHome";
 
 /* Equipment (Product)*/
 import ManageEquipment from "./pages/adminDashboard/manageEquipment";
+import ManageServices from "./pages/adminDashboard/manageServices";
 import ModalForm from "./pages/adminDashboard/modelForm";
+import ServiceForm from "./pages/adminDashboard/serviceForm";
 import UpdateModel from "./pages/adminDashboard/updateModel";
+import UpdateService from "./pages/adminDashboard/updateService";
 
 /* Equipment Manufacturers  (Product Manufacturer)*/
 import ManageEquipmentManufacturers from "./pages/adminDashboard/manageManu";
@@ -25,12 +28,13 @@ import UpdateManufacturer from "./pages/adminDashboard/updateManufacturer";
 
 /* Equipment Types (Product Collection) */
 import ManageEquipmentTypes from "./pages/adminDashboard/manageEquipmentTypes";
+import ManageServiceTypes from "./pages/adminDashboard/manageServiceTypes";
 import TypeForm from "./pages/adminDashboard/typeForm";
+import ServiceTypeForm from "./pages/adminDashboard/serviceTypeForm";
 import UpdateType from "./pages/adminDashboard/updateType";
 
-
 /*Other  */
-import ServiceForm from "./pages/serviceForm";
+import ServiceReqForm from "./pages/serviceForm";
 import ServiceStatus from "./pages/serviceStatus";
 
 import SearchResults from "./pages/searchResults";
@@ -59,7 +63,7 @@ function App() {
         <Route path="/auctions/:auctionId" element={<AuctionOverview />} />
         <Route path="/models" element={<ModelOverview />} />
         <Route path="/search/:searchTerm" element={<SearchResults />} />
-        <Route path="/service" element={<ServiceForm />} />
+        <Route path="/service" element={<ServiceReqForm />} />
         <Route path="/service/status/:serviceId" element={<ServiceStatus />} />
 
         {/* Admin pages */}
@@ -67,7 +71,7 @@ function App() {
 
         {/* Admin pages protected*/}
 
-        <Route path="/" >
+        <Route path="/">
           <Route path="/admin-dashboard" element={<AdminHome />} />
         </Route>
 
@@ -76,11 +80,23 @@ function App() {
         </Route>
 
         <Route path="/">
-          <Route path="/admin-dashboard/create-model" element={<ModalForm />} />
+          <Route path="/admin-dashboard/manage-services" element={<ManageServices />} />
+        </Route>
+
+        <Route path="/">
+          <Route path="/admin-dashboard/create-equipment" element={<ModalForm />} />
+        </Route>
+
+        <Route path="/">
+          <Route path="/admin-dashboard/create-service" element={<ServiceForm />} />
         </Route>
 
         <Route path="/">
           <Route path="/admin-dashboard/update-model/:modelId" element={<UpdateModel />} />
+        </Route>
+
+        <Route path="/">
+          <Route path="/admin-dashboard/update-service/:serviceId" element={<UpdateService />} />
         </Route>
 
         <Route path="/">
@@ -100,11 +116,21 @@ function App() {
         </Route>
 
         <Route path="/">
-          <Route path="/admin-dashboard/manage-equipment-manufacturers" element={<ManageEquipmentManufacturers />} />
+          <Route
+            path="/admin-dashboard/manage-equipment-manufacturers"
+            element={<ManageEquipmentManufacturers />}
+          />
         </Route>
 
         <Route path="/">
-          <Route path="/admin-dashboard/manage-equipment-types" element={<ManageEquipmentTypes />} />
+          <Route
+            path="/admin-dashboard/manage-equipment-types"
+            element={<ManageEquipmentTypes />}
+          />
+        </Route>
+
+        <Route path="/">
+          <Route path="/admin-dashboard/manage-service-types" element={<ManageServiceTypes />} />
         </Route>
 
         <Route path="/">
@@ -120,6 +146,10 @@ function App() {
 
         <Route path="/">
           <Route path="/admin-dashboard/create-equipment-type" element={<TypeForm />} />
+        </Route>
+
+        <Route path="/">
+          <Route path="/admin-dashboard/create-service-type" element={<ServiceTypeForm />} />
         </Route>
 
         <Route path="/">
