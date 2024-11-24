@@ -7,8 +7,8 @@ import ConfirmModal from "../../components/confirmModal";
 import { Link } from "react-router-dom";
 import amettAPI from "../../api/amettAPI";
 
-const ManageEquipment = () => {
-  const [modelsList, setModelsList] = useState([]);
+const ManageServices = () => {
+  const [servicesList, setServicesList] = useState([]);
   const [confirmModalState, setConfirmModalState] = useState(false);
   const [deleteItemName, setDeleteItemName] = useState("");
   const [deleteItemCount, setDeleteItemCount] = useState(0);
@@ -22,18 +22,18 @@ const ManageEquipment = () => {
   const [modalSuccessMsg, setModalSuccessMsg] = useState("");
   const [modalErrMsg, setModalErrMsg] = useState("");
 
-  const sortList = ["Newest", "Oldest", "Model A-Z", "Manufacturer A-Z", "Type A-Z"];
+  const sortList = ["Newest", "Oldest", "Service A-Z", "Type A-Z"];
   const [filteredList, setFilteredList] = new useState([]);
 
   useEffect(() => {
-    const fetchModels = async () => {
+    const fetchServices = async () => {
       try {
-        const response = await amettAPI.get(`/equipment-models`);
-        setModelsList(response.data.data.equipmentModels);
-        setFilteredList(response.data.data.equipmentModels);
+        const response = await amettAPI.get(`/services`);
+        setServicesList(response.data.data.services);
+        setFilteredList(response.data.data.services);
       } catch (error) {}
     };
-    fetchModels();
+    fetchServices();
     setIsCheck([]);
   }, [updateList]);
 
@@ -57,7 +57,7 @@ const ManageEquipment = () => {
     }
   };
 
-  const sortModels = (method) => {
+  const sortServices = (method) => {
     if (method === "Newest") {
       setFilteredList(
         [...filteredList].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
@@ -66,10 +66,8 @@ const ManageEquipment = () => {
       setFilteredList(
         [...filteredList].sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt))
       );
-    } else if (method === "Model A-Z") {
+    } else if (method === "Service A-Z") {
       setFilteredList([...filteredList].sort((a, b) => a.name.localeCompare(b.name)));
-    } else if (method === "Manufacturer A-Z") {
-      setFilteredList([...filteredList].sort((a, b) => a.manufacturer.name.localeCompare(b.name)));
     } else if (method === "Type A-Z") {
       setFilteredList([...filteredList].sort((a, b) => a.type.name.localeCompare(b.name)));
     }
@@ -77,7 +75,7 @@ const ManageEquipment = () => {
 
   const filterBySearch = (event) => {
     const query = event.target.value;
-    var updatedList = [...modelsList];
+    var updatedList = [...servicesList];
 
     updatedList = updatedList.filter((item) => {
       return item.name.toLowerCase().indexOf(query.toLowerCase()) !== -1;
@@ -86,7 +84,7 @@ const ManageEquipment = () => {
     setFilteredList(updatedList);
   };
 
-  const models = filteredList.map((el) => {
+  const services = filteredList.map((el) => {
     return (
       <tr className="bg-white border-b hover:bg-gray-50" key={el._id}>
         <td className="w-4 p-4">
@@ -104,16 +102,7 @@ const ManageEquipment = () => {
           {el.name}
         </th>
         <td className=" px-6 py-4 max-w-sm ellipsis">{el.type.name}</td>
-        <td className="px-6 py-4 max-w-sm ellipsis">{el.manufacturer.name}</td>
         <td className="px-6 py-4">{el.status}</td>
-        <td className="px-6 py-4">
-          <Link
-            className="text-dodger underline"
-            to={{ pathname: "/admin-dashboard/manage-quote-requests", search: `query=${el._id}` }}
-          >
-            Requests List
-          </Link>
-        </td>
 
         <td className="flex items-center justify-center px-6 py-4 space-x-3 ">
           <button
@@ -122,11 +111,9 @@ const ManageEquipment = () => {
               setDeleteItemName(el.name);
               setConfirmModalState(true);
               setSubmitFunction(() => () => {
-                return amettAPI.delete(`/equipment-models/${el._id}`);
+                return amettAPI.delete(`/services/${el._id}`);
               });
-              setModalMsg(
-                `Are you sure you want to delete ${el.name}? All associated quote requests will be deleted as well`
-              );
+              setModalMsg(`Are you sure you want to delete ${el.name}?`);
               setModalSuccessMsg(`${el.name} was deleted successfully!`);
               setModalErrMsg(`Something went wrong! Please try again later`);
             }}
@@ -135,7 +122,7 @@ const ManageEquipment = () => {
             <IoTrash size={20} color="#FA0562" />
           </button>
           <Link
-            to={`/admin-dashboard/update-model/${el._id}`}
+            to={`/admin-dashboard/update-service/${el._id}`}
             className=" flex w-30 text-sm items-center justify-center rounded-3xl border border-transparent  drop-shadow-lg bg-white py-1 px-1  font-semibold text-white "
           >
             <IoPencil size={20} color="#1CABFF" />
@@ -170,29 +157,29 @@ const ManageEquipment = () => {
       />
 
       <div className="col-span-4 mt-10 ">
-        <h2 className="text-xl sm:text-4xl mb-5 mt-2 playfairDisplay-font font-bold">Equipment</h2>
+        <h2 className="text-xl sm:text-4xl mb-5 mt-2 playfairDisplay-font font-bold">Services</h2>
         <div className="flex flex-row justify-end gap-3 my-4">
           <h3 className="flex w-30 text-sm items-center justify-center rounded-sm border border-transparent  py-1 px-4  font-semibold ">
-            {`${filteredList.length} equipment were found`}
+            {`${filteredList.length} services were found`}
           </h3>
-          <Link
+          {/* <Link
             to={"/admin-dashboard/manage-equipment-manufacturers"}
             className="flex items-center justify-center rounded-sm border border-gray-300  bg-white py-1 px-4  shadow-lg"
           >
             Manage Manufacturers
-          </Link>
+          </Link> */}
           <Link
-            to={"/admin-dashboard/manage-equipment-types"}
+            to={"/admin-dashboard/manage-service-types"}
             className="flex items-center justify-center rounded-sm border border-gray-300  bg-white py-1 px-4  shadow-lg"
           >
             Manage Collections
           </Link>
           <Link
-            to={`/admin-dashboard/create-equipment`}
+            to={`/admin-dashboard/create-service`}
             className=" flex w-30 text-sm items-center justify-center rounded-sm border border-transparent bg-dodger py-1 px-4  font-semibold text-white hover:bg-dodgerDark focus:outline-none"
           >
             <IoAddCircleOutline size={30} className="mr-2" />
-            Add Equipment
+            Add Service
           </Link>
 
           <button
@@ -201,13 +188,11 @@ const ManageEquipment = () => {
               setConfirmModalState(true);
               setDeleteItemName("");
 
-              setModalMsg(
-                `Are you sure you want to delete ${isCheck.length} items? All associated quote requests will be deleted as well`
-              );
+              setModalMsg(`Are you sure you want to delete ${isCheck.length} items?`);
               setModalSuccessMsg(`${isCheck.length} items were deleted successfully!`);
               setModalErrMsg(`Something went wrong! Please try again later`);
               setSubmitFunction(() => () => {
-                return amettAPI.delete(`/equipment-models`, {
+                return amettAPI.delete(`/services`, {
                   data: { deleteArray: isCheck },
                 });
               });
@@ -219,13 +204,13 @@ const ManageEquipment = () => {
           >
             <IoTrash size={30} />
           </button>
-          <SortDropdown sortList={sortList} sort={sortModels} />
+          <SortDropdown sortList={sortList} sort={sortServices} />
           <div className="relative text-gray-600 ">
             <input
               className="border-2 border-gray-300 bg-white h-10 pl-2 pr-8 rounded-sm text-sm focus:outline-none  w-full"
               type="search"
               name="search"
-              placeholder="Search for equipment"
+              placeholder="Search for services"
               onChange={filterBySearch}
             />
             <button type="submit" className="absolute right-0 top-0 mt-3 mr-2">
@@ -249,26 +234,22 @@ const ManageEquipment = () => {
                   </div>
                 </th>
                 <th scope="col" className="px-6 py-3">
-                  product name
+                  service name
                 </th>
                 <th scope="col" className="px-6 py-3">
                   collection
                 </th>
-                <th scope="col" className="px-6 py-3">
-                  manufacturer
-                </th>
+
                 <th scope="col" className="px-6 py-3">
                   status
                 </th>
-                <th scope="col" className="px-6 py-3">
-                  Quote Requests
-                </th>
+
                 <th scope="col" className="px-6 py-3">
                   Action
                 </th>
               </tr>
             </thead>
-            <tbody>{models}</tbody>
+            <tbody>{services}</tbody>
           </table>
         </div>
       </div>
@@ -276,4 +257,4 @@ const ManageEquipment = () => {
   );
 };
 
-export default ManageEquipment;
+export default ManageServices;

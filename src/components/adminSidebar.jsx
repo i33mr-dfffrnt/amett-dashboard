@@ -34,6 +34,15 @@ const AdminSidebar = () => {
             </li>
             <li className="rounded-sm bg-white">
               <Link
+                to={"/admin-dashboard/manage-services"}
+                className="flex items-center p-2 space-x-3 rounded-md"
+              >
+                <MdOutlineRequestQuote size={24} />
+                <span className="font-semibold oswald-font text-xl ">Services</span>
+              </Link>
+            </li>
+            {/* <li className="rounded-sm bg-white">
+              <Link
                 to={"/admin-dashboard/manage-auctions"}
                 className="flex items-center p-2 space-x-3 rounded-md"
               >
@@ -60,7 +69,7 @@ const AdminSidebar = () => {
                 <MdOutlineRequestQuote size={24} />
                 <span className="font-semibold oswald-font text-xl ">Manage Quotes</span>
               </Link>
-            </li>
+            </li> */}
 
             <li className="rounded-sm bg-white">
               <button
