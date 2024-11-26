@@ -104,16 +104,16 @@ const ManageEquipment = () => {
           {el.name}
         </th>
         <td className=" px-6 py-4 max-w-sm ellipsis">{el.type.name}</td>
-        <td className="px-6 py-4 max-w-sm ellipsis">{el.manufacturer.name}</td>
+        {/* <td className="px-6 py-4 max-w-sm ellipsis">{el.manufacturer.name}</td> */}
         <td className="px-6 py-4">{el.status}</td>
-        <td className="px-6 py-4">
+        {/* <td className="px-6 py-4">
           <Link
             className="text-dodger underline"
             to={{ pathname: "/admin-dashboard/manage-quote-requests", search: `query=${el._id}` }}
           >
             Requests List
           </Link>
-        </td>
+        </td> */}
 
         <td className="flex items-center justify-center px-6 py-4 space-x-3 ">
           <button
@@ -254,15 +254,15 @@ const ManageEquipment = () => {
                 <th scope="col" className="px-6 py-3">
                   collection
                 </th>
-                <th scope="col" className="px-6 py-3">
+                {/* <th scope="col" className="px-6 py-3">
                   manufacturer
-                </th>
+                </th> */}
                 <th scope="col" className="px-6 py-3">
                   status
                 </th>
-                <th scope="col" className="px-6 py-3">
+                {/* <th scope="col" className="px-6 py-3">
                   Quote Requests
-                </th>
+                </th> */}
                 <th scope="col" className="px-6 py-3">
                   Action
                 </th>
