@@ -16,8 +16,10 @@ const AdminHome = () => {
   useEffect(() => {
     const fetchAuctions = async () => {
       try {
-        const response = await amettAPI.get(`/auctions`);
-        setAuctionsLength(response.data.data.auctions.length);
+        const response = await amettAPI.get(`/services`);
+        console.log("response", response);
+
+        setAuctionsLength(response.data.data.services.length);
       } catch (error) {}
     };
 
@@ -124,18 +126,18 @@ const AdminHome = () => {
             <div className="flex items-center ">
               <div>
                 <h2 className="text-7xl mb-10 rubik-font text-white">{auctionsLength}</h2>
-                <h3 className="text-4xl rubik-font text-white font-semibold">Active Auctions</h3>
+                <h3 className="text-4xl rubik-font text-white font-semibold">Services</h3>
               </div>
             </div>
             <div className="flex justify-end">
-              <RiAuctionLine size={150} color="#FFF" />
+              <GiMoneyStack size={150} color="#FFF" />
             </div>
           </div>
           <div className="grid grid-cols-2 py-8 px-10 rounded-2xl shadow-lg bg-redCard flex items-center content-center ">
             <div className="flex items-center ">
               <div>
                 <h2 className="text-7xl mb-10 rubik-font text-white">{modelsLength}</h2>
-                <h3 className="text-4xl  rubik-font text-white font-semibold">Models</h3>
+                <h3 className="text-4xl  rubik-font text-white font-semibold">Equipment</h3>
               </div>
             </div>
             <div className="flex justify-end">
@@ -143,7 +145,7 @@ const AdminHome = () => {
             </div>
           </div>
         </div>
-        <div className="grid grid-cols-3 gap-4 p-4">
+        {/* <div className="grid grid-cols-3 gap-4 p-4">
           <div className="grid grid-cols-2 py-8 px-10 rounded-2xl shadow-lg bg-brownCard flex items-center content-center ">
             <div className="flex items-center ">
               <div>
@@ -177,11 +179,9 @@ const AdminHome = () => {
                 </h3>
               </div>
             </div>
-            {/* <div className="flex justify-end">
-              <GiMedicalDrip size={150} color="#FFF" />
-            </div> */}
+            
           </div>
-        </div>
+        </div> */}
         {data && (
           <div className="h-96">
             <Chart data={data} />
