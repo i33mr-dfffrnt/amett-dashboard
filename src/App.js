@@ -72,98 +72,98 @@ function App() {
 
         {/* Admin pages protected*/}
 
-        <Route path="/">
+        <Route path="/" element={<PrivateRoute />}>
           <Route path="/admin-dashboard" element={<AdminHome />} />
         </Route>
 
-        <Route path="/">
+        <Route path="/" element={<PrivateRoute />}>
           <Route path="/admin-dashboard/manage-equipment" element={<ManageEquipment />} />
         </Route>
 
-        <Route path="/">
+        <Route path="/" element={<PrivateRoute />}>
           <Route path="/admin-dashboard/manage-services" element={<ManageServices />} />
         </Route>
-        <Route path="/">
+        <Route path="/" element={<PrivateRoute />}>
           <Route path="/admin-dashboard/manage-requests" element={<ManageRequests />} />
         </Route>
 
-        <Route path="/">
+        <Route path="/" element={<PrivateRoute />}>
           <Route path="/admin-dashboard/create-equipment" element={<ModalForm />} />
         </Route>
 
-        <Route path="/">
+        <Route path="/" element={<PrivateRoute />}>
           <Route path="/admin-dashboard/create-service" element={<ServiceForm />} />
         </Route>
 
-        <Route path="/">
+        <Route path="/" element={<PrivateRoute />}>
           <Route path="/admin-dashboard/update-model/:modelId" element={<UpdateModel />} />
         </Route>
 
-        <Route path="/">
+        <Route path="/" element={<PrivateRoute />}>
           <Route path="/admin-dashboard/update-service/:serviceId" element={<UpdateService />} />
         </Route>
 
-        <Route path="/">
+        <Route path="/" element={<PrivateRoute />}>
           <Route path="/admin-dashboard/manage-auctions" element={<ManageAuctions />} />
         </Route>
 
-        <Route path="/">
+        <Route path="/" element={<PrivateRoute />}>
           <Route path="/admin-dashboard/update-auction/:auctionId" element={<UpdateAuction />} />
         </Route>
 
-        <Route path="/">
+        <Route path="/" element={<PrivateRoute />}>
           <Route path="/admin-dashboard/manage-bids" element={<ManageBids />} />
         </Route>
 
-        <Route path="/">
+        <Route path="/" element={<PrivateRoute />}>
           <Route path="/admin-dashboard/manage-quote-requests" element={<ManageQuoteRequests />} />
         </Route>
 
-        <Route path="/">
+        <Route path="/" element={<PrivateRoute />}>
           <Route
             path="/admin-dashboard/manage-equipment-manufacturers"
             element={<ManageEquipmentManufacturers />}
           />
         </Route>
 
-        <Route path="/">
+        <Route path="/" element={<PrivateRoute />}>
           <Route
             path="/admin-dashboard/manage-equipment-types"
             element={<ManageEquipmentTypes />}
           />
         </Route>
 
-        <Route path="/">
+        <Route path="/" element={<PrivateRoute />}>
           <Route path="/admin-dashboard/manage-service-types" element={<ManageServiceTypes />} />
         </Route>
 
-        <Route path="/">
+        <Route path="/" element={<PrivateRoute />}>
           <Route path="/admin-dashboard/create-manufacturer" element={<ManufacturerForm />} />
         </Route>
 
-        <Route path="/">
+        <Route path="/" element={<PrivateRoute />}>
           <Route
             path="/admin-dashboard/update-manufacturer/:manufacturerId"
             element={<UpdateManufacturer />}
           />
         </Route>
 
-        <Route path="/">
+        <Route path="/" element={<PrivateRoute />}>
           <Route path="/admin-dashboard/create-equipment-type" element={<TypeForm />} />
         </Route>
 
-        <Route path="/">
+        <Route path="/" element={<PrivateRoute />}>
           <Route path="/admin-dashboard/create-service-type" element={<ServiceTypeForm />} />
         </Route>
 
-        <Route path="/">
+        <Route path="/" element={<PrivateRoute />}>
           <Route path="/admin-dashboard/update-equipment-type/:typeId" element={<UpdateType />} />
         </Route>
 
-        <Route path="/">
+        <Route path="/" element={<PrivateRoute />}>
           <Route path="/admin-dashboard/manage-admins" element={<ManageAdmins />} />
         </Route>
-        <Route path="/">
+        <Route path="/" element={<PrivateRoute />}>
           <Route path="/admin-dashboard/404" element={<AdminNotFoundPage />} />
         </Route>
 
