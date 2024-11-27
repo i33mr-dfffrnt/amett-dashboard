@@ -4,12 +4,14 @@ import isAuth from "../utils/auth";
 
 const PrivateRoute = () => {
   const [isLoading, setIsLoading] = useState(true);
-  const [isValid, setIsValid] = useState(true);
+  const [isValid, setIsValid] = useState(null);
   // const auth = isAuth(); // determine if authorized, from context or however you're doing it
   // console.log(auth);
   // If authorized, return an outlet that will render child elements
   // If not, return element that will navigate to login page
   isAuth().then((isValid) => {
+    console.log("isValid", isValid);
+
     setIsValid(isValid);
     setIsLoading(false);
   });
@@ -22,11 +24,11 @@ const PrivateRoute = () => {
   ) : isValid === true ? (
     <Outlet />
   ) : (
-    <Navigate to="/admin-dashboard/login" />
+    <Navigate to="/login" />
   );
-  // return auth ? <Outlet /> : <Navigate to="/admin-dashboard/login" />;
+  // return auth ? <Outlet /> : <Navigate to="/login" />;
   // return <Outlet />;
-  // return <Navigate to="/admin-dashboard/login" />;
+  // return <Navigate to="/login" />;
 };
 
 export default PrivateRoute;

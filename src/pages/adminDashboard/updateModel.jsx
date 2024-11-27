@@ -136,7 +136,7 @@ const UpdateModel = () => {
         setStatus(response.data.data.equipmentModel.status);
         setDescription(response.data.data.equipmentModel.description);
       } catch (error) {
-        navigate("/admin-dashboard/404", { replace: true });
+        navigate("/404", { replace: true });
       }
     };
     fetchModel();
@@ -196,7 +196,7 @@ const UpdateModel = () => {
           <button className="flex items-center justify-center rounded-sm border border-gray-300  bg-white py-1 px-4  shadow-lg">
             New Type
           </button>
-          <h5 className="">Manufacturer*</h5>
+          {/* <h5 className="">Manufacturer*</h5>
           <select
             name="manufacturer"
             className="border border-gray-300 rounded-sm col-span-3 bg-white p-1"
@@ -217,7 +217,7 @@ const UpdateModel = () => {
 
           <button className="flex items-center justify-center rounded-sm border border-gray-300  bg-white py-1 px-4  shadow-lg">
             New Manufacturer
-          </button>
+          </button> */}
           <h5 className="">Status*</h5>
           <select
             name="status"

@@ -18,41 +18,32 @@ const AdminSidebar = () => {
         <div className="flex-1">
           <ul className="pt-2 pb-4 space-y-1 text-sm">
             <li className="rounded-sm bg-white">
-              <Link to={"/admin-dashboard"} className="flex items-center p-2 space-x-3 rounded-md">
+              <Link to={"/"} className="flex items-center p-2 space-x-3 rounded-md">
                 <TbHome size={24} />
                 <span className="font-semibold oswald-font text-xl ">Home</span>
               </Link>
             </li>
             <li className="rounded-sm bg-white">
-              <Link
-                to={"/admin-dashboard/manage-equipment"}
-                className="flex items-center p-2 space-x-3 rounded-md"
-              >
+              <Link to={"/manage-equipment"} className="flex items-center p-2 space-x-3 rounded-md">
                 <TbDeviceHeartMonitor size={24} />
                 <span className="font-semibold oswald-font text-xl ">Equipment</span>
               </Link>
             </li>
             <li className="rounded-sm bg-white">
-              <Link
-                to={"/admin-dashboard/manage-services"}
-                className="flex items-center p-2 space-x-3 rounded-md"
-              >
+              <Link to={"/manage-services"} className="flex items-center p-2 space-x-3 rounded-md">
                 <MdOutlineRequestQuote size={24} />
                 <span className="font-semibold oswald-font text-xl ">Services</span>
               </Link>
             </li>
             <li className="rounded-sm bg-white">
-              <Link
-                to={"/admin-dashboard/manage-requests"}
-                className="flex items-center p-2 space-x-3 rounded-md"
-              >
+              <Link to={"/manage-requests"} className="flex items-center p-2 space-x-3 rounded-md">
                 <MdOutlineRequestQuote size={24} />
                 <span className="font-semibold oswald-font text-xl ">Requests</span>
               </Link>
             </li>
             {/* <li className="rounded-sm bg-white">
               <Link
-                to={"/admin-dashboard/manage-auctions"}
+                to={"/manage-auctions"}
                 className="flex items-center p-2 space-x-3 rounded-md"
               >
                 <RiAuctionLine size={24} />
@@ -62,7 +53,7 @@ const AdminSidebar = () => {
             </li>
             <li className="rounded-sm bg-white">
               <Link
-                to={"/admin-dashboard/manage-bids"}
+                to={"/manage-bids"}
                 className="flex items-center p-2 space-x-3 rounded-md"
               >
                 <BiDollar size={24} />
@@ -72,7 +63,7 @@ const AdminSidebar = () => {
             </li>
             <li className="rounded-sm bg-white">
               <Link
-                to={"/admin-dashboard/manage-quote-requests"}
+                to={"/manage-quote-requests"}
                 className="flex items-center p-2 space-x-3 rounded-md"
               >
                 <MdOutlineRequestQuote size={24} />
@@ -85,7 +76,7 @@ const AdminSidebar = () => {
                 className="flex items-center p-2 space-x-3 rounded-md"
                 onClick={async () => {
                   await amettAPI.post(`/auth/logout`);
-                  navigate("/admin-dashboard/login");
+                  navigate("/login");
                 }}
               >
                 <RiLogoutBoxLine size={24} />

@@ -1,23 +1,46 @@
 import AdminSidebar from "../../components/adminSidebar";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import amettAPI from "../../api/amettAPI";
 import ErrorNotification from "../../components/errorNotification";
 import CustomCropper from "../../components/customCropper";
 
 import { getCroppedImg } from "../../utils/canvasUtils";
 import SuccessNotification from "../../components/successNotification";
+import { useNavigate, useParams } from "react-router-dom";
 
-const TypeForm = () => {
+const UpdateType = () => {
+  const navigate = useNavigate();
+
+  const { typeId } = useParams();
+  const [type, setType] = useState({});
+
   const [typeName, setTypeName] = useState("");
+  const [imageSrc, setImageSrc] = useState(null);
+  const [previewUri, setPreviewUri] = useState("");
 
   const [isSuccessAlertShown, setSuccessAlertShown] = useState(false);
   const [isErrorAlertShown, setErrorAlertShown] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
+  useEffect(() => {
+    const fetchType = async () => {
+      try {
+        console.log("fetch types", typeId);
+
+        const response = await amettAPI.get(`/service-types/${typeId}`);
+        setType(response.data.data.serviceType);
+        console.log("response: ", response);
+        setTypeName(response.data.data.serviceType.name);
+      } catch (error) {
+        navigate("/404", { replace: true });
+      }
+    };
+    fetchType();
+  }, []);
   const validateForm = () => {
     if (typeName.trim() === "") {
-      setErrorMessage("Please input collection name");
+      setErrorMessage("Please input type name");
       return false;
     } else return true;
   };
@@ -28,9 +51,7 @@ const TypeForm = () => {
     setIsLoading(true);
     if (validateForm()) {
       try {
-        const formData = new FormData();
-
-        await amettAPI.post(`/equipment-types`, { name: typeName });
+        await amettAPI.patch(`/service-types/${typeId}`, { name: typeName });
 
         setIsLoading(false);
         setSuccessAlertShown(true);
@@ -62,7 +83,7 @@ const TypeForm = () => {
       ) : null}
       <div className="col-span-4 mt-10 ">
         <h2 className="text-xl sm:text-4xl mb-5 mt-2 playfairDisplay-font font-bold">
-          Add New Collection
+          Update Collection
         </h2>
         <h3 className=" text-lg sm:text-xl playfairDisplay-font flex  flex-row justify-start mr-3 mt-4 bg-baseBlue text-white p-1 font-bold">
           Collection Details
@@ -79,29 +100,6 @@ const TypeForm = () => {
             value={typeName}
           />
 
-          {/* <h5 className="">Collection Photo*</h5>
-          <input type="file" accept="image/*" onChange={onFileChange} /> */}
-
-          {/* <div className="col-span-5 ">
-            {imageSrc && (
-              <div className="mx-auto max-w-2xl px-4 pt-10 pb-16 sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-2 lg:grid-rows-[auto,auto,1fr] lg:gap-x-8 lg:px-8 lg:pt-8 lg:pb-24">
-                <div>
-                  Modify image
-                  <CustomCropper image={imageSrc} showCroppedImage={showCroppedImage} />
-                </div>
-                <div>
-                  How it will look like:
-                  <div className="flex flex-col items-center  w-full rounded-lg ">
-                    <img
-                      className="h-44 lg:h-72 object-cover bg-white"
-                      src={previewUri.url}
-                      alt=""
-                    />
-                  </div>
-                </div>
-              </div>
-            )}
-          </div> */}
           <div className="col-span-5 flex justify-center">
             <button
               onClick={(event) => {
@@ -142,4 +140,4 @@ const TypeForm = () => {
   );
 };
 
-export default TypeForm;
+export default UpdateType;

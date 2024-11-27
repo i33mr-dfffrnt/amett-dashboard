@@ -124,7 +124,7 @@ const UpdateService = () => {
         setStatus(response.data.data.service.status);
         setDescription(response.data.data.service.description);
       } catch (error) {
-        navigate("/admin-dashboard/404", { replace: true });
+        navigate("/404", { replace: true });
       }
     };
     fetchService();

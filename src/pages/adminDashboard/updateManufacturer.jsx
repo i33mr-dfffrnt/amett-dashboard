@@ -30,7 +30,7 @@ const UpdateManufacturer = () => {
         setManufacturer(response.data.data.equipmentManufacturer);
         setManufacturerName(response.data.data.equipmentManufacturer.name);
       } catch (error) {
-        navigate("/admin-dashboard/404", { replace: true });
+        navigate("/404", { replace: true });
       }
     };
     fetchManufacturer();

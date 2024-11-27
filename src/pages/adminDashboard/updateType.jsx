@@ -26,12 +26,14 @@ const UpdateType = () => {
   useEffect(() => {
     const fetchType = async () => {
       try {
+        console.log("fetch types");
+
         const response = await amettAPI.get(`/equipment-types/${typeId}`);
         setType(response.data.data.equipmentType);
-        console.log("response: ", response)
+        console.log("response: ", response);
         setTypeName(response.data.data.equipmentType.name);
       } catch (error) {
-        navigate("/admin-dashboard/404", { replace: true });
+        navigate("/404", { replace: true });
       }
     };
     fetchType();
@@ -48,19 +50,8 @@ const UpdateType = () => {
     setErrorAlertShown(false);
     setIsLoading(true);
     if (validateForm()) {
-      const formData = new FormData();
       try {
-        if (imageSrc) {
-          var file = new File([previewUri.file], "image.jpg", { type: previewUri.file.type });
-
-          formData.append("image", file);
-        }
-
-        formData.append("name", typeName);
-
-        await amettAPI.patch(`/equipment-types/${typeId}`, formData, {
-          headers: { "Content-type": "multipart/form-date" },
-        });
+        await amettAPI.patch(`/equipment-types/${typeId}`, { name: typeName });
 
         setIsLoading(false);
         setSuccessAlertShown(true);
@@ -73,30 +64,6 @@ const UpdateType = () => {
       setIsLoading(false);
       setErrorAlertShown(true);
     }
-  };
-
-  function readFile(file) {
-    return new Promise((resolve) => {
-      const reader = new FileReader();
-      reader.addEventListener("load", () => resolve(reader.result), false);
-      reader.readAsDataURL(file);
-    });
-  }
-  const onFileChange = async (e) => {
-    if (e.target.files && e.target.files.length > 0) {
-      const file = e.target.files[0];
-
-      let imageDataUrl = await readFile(file);
-
-      setImageSrc(imageDataUrl);
-    }
-  };
-
-  const showCroppedImage = async (croppedAreaPixels) => {
-    try {
-      const croppedImage = await getCroppedImg(imageSrc, croppedAreaPixels, 0);
-      setPreviewUri(croppedImage);
-    } catch (error) {}
   };
 
   return (
@@ -116,13 +83,13 @@ const UpdateType = () => {
       ) : null}
       <div className="col-span-4 mt-10 ">
         <h2 className="text-xl sm:text-4xl mb-5 mt-2 playfairDisplay-font font-bold">
-          Update Type
+          Update Collection
         </h2>
         <h3 className=" text-lg sm:text-xl playfairDisplay-font flex  flex-row justify-start mr-3 mt-4 bg-baseBlue text-white p-1 font-bold">
-          Type Details
+          Collection Details
         </h3>
         <form className="grid grid-cols-5  gap-4 text-md lg:text-xl playfairDisplay-font  mr-3  bg-baseGray px-10 lg:px-20 xl:px-32 py-10">
-          <h5 className="">Type Name*</h5>
+          <h5 className="">Collection Name*</h5>
           <input
             type="text"
             name="name"
@@ -133,43 +100,6 @@ const UpdateType = () => {
             value={typeName}
           />
 
-          <h5 className="">Type Photo*</h5>
-          <input type="file" accept="image/*" onChange={onFileChange} />
-
-          <div className="col-span-5 ">
-            {imageSrc && (
-              <div className="mx-auto max-w-2xl px-4 pt-10 pb-16 sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-2 lg:grid-rows-[auto,auto,1fr] lg:gap-x-8 lg:px-8 lg:pt-8 lg:pb-24">
-                <div>
-                  Modify image
-                  <CustomCropper image={imageSrc} showCroppedImage={showCroppedImage} />
-                </div>
-                <div>
-                  How it will look like:
-                  <div className="flex flex-col items-center  w-full rounded-lg ">
-                    <img
-                      className="h-44 lg:h-72 object-contain bg-white"
-                      src={previewUri.url}
-                      alt=""
-                    />
-                  </div>
-                </div>
-              </div>
-            )}
-            {!imageSrc && (
-              <div className="mx-auto max-w-2xl lg:grid lg:max-w-7xl lg:grid-cols-2 lg:grid-rows-[auto,auto,1fr] lg:gap-x-8 ">
-                <div className="rounded-lg  product-carousel">
-                  Current image (if you plan to keep it, do not upload a new one)
-                  <div className="items-center  w-full rounded-lg ">
-                    <img
-                      className="h-44 lg:h-72 object-cover bg-white"
-                      src={type.imageUrl}
-                      alt=""
-                    />
-                  </div>
-                </div>
-              </div>
-            )}
-          </div>
           <div className="col-span-5 flex justify-center">
             <button
               onClick={(event) => {
@@ -180,7 +110,7 @@ const UpdateType = () => {
               className="flex items-center justify-center rounded-lg border border-gray-300 py-4 px-6 font-bold bg-baseGreen text-white  text-2xl shadow-lg"
             >
               {!isLoading ? (
-                "Save Type"
+                "Save Collection"
               ) : (
                 <div role="status">
                   <svg
