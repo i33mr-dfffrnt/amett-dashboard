@@ -134,7 +134,7 @@ const ManageAuctions = () => {
         <td className="px-6 py-4 ">
           <Link
             className="text-dodger underline"
-            to={{ pathname: "/admin-dashboard/manage-bids", search: `query=${el._id}` }}
+            to={{ pathname: "/manage-bids", search: `query=${el._id}` }}
           >
             Bids List
           </Link>
@@ -169,7 +169,7 @@ const ManageAuctions = () => {
             <IoTrash size={20} color="#FA0562" />
           </button>
           <Link
-            to={`/admin-dashboard/update-auction/${el._id}`}
+            to={`/update-auction/${el._id}`}
             className=" flex w-30 text-sm items-center justify-center rounded-3xl border border-transparent  drop-shadow-lg bg-white py-1 px-1  font-semibold text-white "
           >
             <IoPencil size={20} color="#1CABFF" />

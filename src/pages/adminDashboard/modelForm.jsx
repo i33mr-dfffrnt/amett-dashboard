@@ -180,12 +180,12 @@ const ModelForm = () => {
           </select>
 
           <Link
-            to={`/admin-dashboard/create-equipment-type`}
+            to={`/create-equipment-type`}
             className="flex items-center justify-center rounded-sm border border-gray-300  bg-white py-1 px-4  shadow-lg"
           >
             New Type
           </Link>
-          <h5 className="">Manufacturer*</h5>
+          {/* <h5 className="">Manufacturer*</h5>
           <select
             name="manufacturer"
             className="border border-gray-300 rounded-sm col-span-3 bg-white p-1"
@@ -204,11 +204,11 @@ const ModelForm = () => {
               })}
           </select>
           <Link
-            to={`/admin-dashboard/create-manufacturer`}
+            to={`/create-manufacturer`}
             className="flex items-center justify-center rounded-sm border border-gray-300  bg-white py-1 px-4  shadow-lg"
           >
             New Manufacturer
-          </Link>
+          </Link> */}
           <h5 className="">Description*</h5>
           <textarea
             name="description"

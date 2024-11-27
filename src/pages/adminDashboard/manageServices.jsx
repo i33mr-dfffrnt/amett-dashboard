@@ -122,7 +122,7 @@ const ManageServices = () => {
             <IoTrash size={20} color="#FA0562" />
           </button>
           <Link
-            to={`/admin-dashboard/update-service/${el._id}`}
+            to={`/update-service/${el._id}`}
             className=" flex w-30 text-sm items-center justify-center rounded-3xl border border-transparent  drop-shadow-lg bg-white py-1 px-1  font-semibold text-white "
           >
             <IoPencil size={20} color="#1CABFF" />
@@ -163,19 +163,19 @@ const ManageServices = () => {
             {`${filteredList.length} services were found`}
           </h3>
           {/* <Link
-            to={"/admin-dashboard/manage-equipment-manufacturers"}
+            to={"/manage-equipment-manufacturers"}
             className="flex items-center justify-center rounded-sm border border-gray-300  bg-white py-1 px-4  shadow-lg"
           >
             Manage Manufacturers
           </Link> */}
           <Link
-            to={"/admin-dashboard/manage-service-types"}
+            to={"/manage-service-types"}
             className="flex items-center justify-center rounded-sm border border-gray-300  bg-white py-1 px-4  shadow-lg"
           >
             Manage Collections
           </Link>
           <Link
-            to={`/admin-dashboard/create-service`}
+            to={`/create-service`}
             className=" flex w-30 text-sm items-center justify-center rounded-sm border border-transparent bg-dodger py-1 px-4  font-semibold text-white hover:bg-dodgerDark focus:outline-none"
           >
             <IoAddCircleOutline size={30} className="mr-2" />

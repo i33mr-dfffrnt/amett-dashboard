@@ -29,7 +29,7 @@ const ManageEquipmentManufacturers = () => {
     const fetchManufacturers = async () => {
       try {
         const response = await amettAPI.get(`/equipment-manufacturers`);
-        console.log(response)
+        console.log(response);
         setManufacturersList(response.data.data.equipmentManufacturers);
         setFilteredList(response.data.data.equipmentManufacturers);
       } catch (error) {}
@@ -121,7 +121,7 @@ const ManageEquipmentManufacturers = () => {
             <IoTrash size={20} color="#FA0562" />
           </button>
           <Link
-            to={`/admin-dashboard/update-manufacturer/${el._id}`}
+            to={`/update-manufacturer/${el._id}`}
             className=" flex w-30 text-sm items-center justify-center rounded-3xl border border-transparent  drop-shadow-lg bg-white py-1 px-1  font-semibold text-white "
           >
             <IoPencil size={20} color="#1CABFF" />
@@ -165,7 +165,7 @@ const ManageEquipmentManufacturers = () => {
           </h3>
 
           <Link
-            to={`/admin-dashboard/create-manufacturer`}
+            to={`/create-manufacturer`}
             className=" flex w-30 text-sm items-center justify-center rounded-sm border border-transparent bg-dodger py-1 px-4  font-semibold text-white hover:bg-dodgerDark focus:outline-none"
           >
             <IoAddCircleOutline size={30} className="mr-2" />

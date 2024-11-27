@@ -21,6 +21,7 @@ import ModalForm from "./pages/adminDashboard/modelForm";
 import ServiceForm from "./pages/adminDashboard/serviceForm";
 import UpdateModel from "./pages/adminDashboard/updateModel";
 import UpdateService from "./pages/adminDashboard/updateService";
+import UpdateServiceType from "./pages/adminDashboard/updateServiceType";
 
 /* Equipment Manufacturers  (Product Manufacturer)*/
 import ManageEquipmentManufacturers from "./pages/adminDashboard/manageManu";
@@ -35,12 +36,6 @@ import ServiceTypeForm from "./pages/adminDashboard/serviceTypeForm";
 import UpdateType from "./pages/adminDashboard/updateType";
 
 /*Other  */
-import ServiceReqForm from "./pages/serviceForm";
-import ServiceStatus from "./pages/serviceStatus";
-
-import SearchResults from "./pages/searchResults";
-import AuctionOverview from "./pages/auctionOverview";
-import EquipManufacturersPage from "./pages/equipManufacturersPage";
 
 import ManageAuctions from "./pages/adminDashboard/manageAuctions";
 import ManageBids from "./pages/adminDashboard/manageBids";
@@ -57,114 +52,102 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/equipment-types" element={<EquipTypesPage />} />
-        <Route path="/equipment-manufacturers/:typeId" element={<EquipManufacturersPage />} />
-        <Route path="/auctions" element={<Auctions />} />
-        <Route path="/auctions/:auctionId" element={<AuctionOverview />} />
-        <Route path="/models" element={<ModelOverview />} />
-        <Route path="/search/:searchTerm" element={<SearchResults />} />
-        <Route path="/service" element={<ServiceReqForm />} />
-        <Route path="/service/status/:serviceId" element={<ServiceStatus />} />
-
         {/* Admin pages */}
-        <Route path="/admin-dashboard/login" element={<AdminLogin />} />
+        <Route path="/login" element={<AdminLogin />} />
 
         {/* Admin pages protected*/}
 
         <Route path="/" element={<PrivateRoute />}>
-          <Route path="/admin-dashboard" element={<AdminHome />} />
+          <Route path="/" element={<AdminHome />} />
         </Route>
 
         <Route path="/" element={<PrivateRoute />}>
-          <Route path="/admin-dashboard/manage-equipment" element={<ManageEquipment />} />
+          <Route path="/manage-equipment" element={<ManageEquipment />} />
         </Route>
 
         <Route path="/" element={<PrivateRoute />}>
-          <Route path="/admin-dashboard/manage-services" element={<ManageServices />} />
+          <Route path="/manage-services" element={<ManageServices />} />
         </Route>
         <Route path="/" element={<PrivateRoute />}>
-          <Route path="/admin-dashboard/manage-requests" element={<ManageRequests />} />
-        </Route>
-
-        <Route path="/" element={<PrivateRoute />}>
-          <Route path="/admin-dashboard/create-equipment" element={<ModalForm />} />
+          <Route path="/manage-requests" element={<ManageRequests />} />
         </Route>
 
         <Route path="/" element={<PrivateRoute />}>
-          <Route path="/admin-dashboard/create-service" element={<ServiceForm />} />
+          <Route path="/create-equipment" element={<ModalForm />} />
         </Route>
 
         <Route path="/" element={<PrivateRoute />}>
-          <Route path="/admin-dashboard/update-model/:modelId" element={<UpdateModel />} />
+          <Route path="/create-service" element={<ServiceForm />} />
         </Route>
 
         <Route path="/" element={<PrivateRoute />}>
-          <Route path="/admin-dashboard/update-service/:serviceId" element={<UpdateService />} />
+          <Route path="/update-model/:modelId" element={<UpdateModel />} />
         </Route>
 
         <Route path="/" element={<PrivateRoute />}>
-          <Route path="/admin-dashboard/manage-auctions" element={<ManageAuctions />} />
+          <Route path="/update-service/:serviceId" element={<UpdateService />} />
         </Route>
 
         <Route path="/" element={<PrivateRoute />}>
-          <Route path="/admin-dashboard/update-auction/:auctionId" element={<UpdateAuction />} />
+          <Route path="/update-service-type/:typeId" element={<UpdateServiceType />} />
         </Route>
 
         <Route path="/" element={<PrivateRoute />}>
-          <Route path="/admin-dashboard/manage-bids" element={<ManageBids />} />
+          <Route path="/manage-auctions" element={<ManageAuctions />} />
         </Route>
 
         <Route path="/" element={<PrivateRoute />}>
-          <Route path="/admin-dashboard/manage-quote-requests" element={<ManageQuoteRequests />} />
+          <Route path="/update-auction/:auctionId" element={<UpdateAuction />} />
+        </Route>
+
+        <Route path="/" element={<PrivateRoute />}>
+          <Route path="/manage-bids" element={<ManageBids />} />
+        </Route>
+
+        <Route path="/" element={<PrivateRoute />}>
+          <Route path="/manage-quote-requests" element={<ManageQuoteRequests />} />
         </Route>
 
         <Route path="/" element={<PrivateRoute />}>
           <Route
-            path="/admin-dashboard/manage-equipment-manufacturers"
+            path="/manage-equipment-manufacturers"
             element={<ManageEquipmentManufacturers />}
           />
         </Route>
 
         <Route path="/" element={<PrivateRoute />}>
-          <Route
-            path="/admin-dashboard/manage-equipment-types"
-            element={<ManageEquipmentTypes />}
-          />
+          <Route path="/manage-equipment-types" element={<ManageEquipmentTypes />} />
         </Route>
 
         <Route path="/" element={<PrivateRoute />}>
-          <Route path="/admin-dashboard/manage-service-types" element={<ManageServiceTypes />} />
+          <Route path="/manage-service-types" element={<ManageServiceTypes />} />
         </Route>
 
         <Route path="/" element={<PrivateRoute />}>
-          <Route path="/admin-dashboard/create-manufacturer" element={<ManufacturerForm />} />
+          <Route path="/create-manufacturer" element={<ManufacturerForm />} />
         </Route>
 
         <Route path="/" element={<PrivateRoute />}>
-          <Route
-            path="/admin-dashboard/update-manufacturer/:manufacturerId"
-            element={<UpdateManufacturer />}
-          />
+          <Route path="/update-manufacturer/:manufacturerId" element={<UpdateManufacturer />} />
         </Route>
 
         <Route path="/" element={<PrivateRoute />}>
-          <Route path="/admin-dashboard/create-equipment-type" element={<TypeForm />} />
+          <Route path="/create-equipment-type" element={<TypeForm />} />
         </Route>
 
         <Route path="/" element={<PrivateRoute />}>
-          <Route path="/admin-dashboard/create-service-type" element={<ServiceTypeForm />} />
+          <Route path="/create-service-type" element={<ServiceTypeForm />} />
         </Route>
 
         <Route path="/" element={<PrivateRoute />}>
-          <Route path="/admin-dashboard/update-equipment-type/:typeId" element={<UpdateType />} />
+          <Route path="/update-equipment-type/:typeId" element={<UpdateType />} />
         </Route>
 
         <Route path="/" element={<PrivateRoute />}>
-          <Route path="/admin-dashboard/manage-admins" element={<ManageAdmins />} />
+          <Route path="/manage-admins" element={<ManageAdmins />} />
         </Route>
         <Route path="/" element={<PrivateRoute />}>
-          <Route path="/admin-dashboard/404" element={<AdminNotFoundPage />} />
+          <Route path="/404" element={<AdminNotFoundPage />} />
         </Route>
 
         <Route path="/404" element={<NotFoundPage />} />

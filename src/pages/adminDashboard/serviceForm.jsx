@@ -180,7 +180,7 @@ const ServiceForm = () => {
           </select>
 
           <Link
-            to={`/admin-dashboard/create-service-type`}
+            to={`/create-service-type`}
             className="flex items-center justify-center rounded-sm border border-gray-300  bg-white py-1 px-4  shadow-lg"
           >
             New Type
@@ -204,7 +204,7 @@ const ServiceForm = () => {
               })}
           </select>
           <Link
-            to={`/admin-dashboard/create-manufacturer`}
+            to={`/create-manufacturer`}
             className="flex items-center justify-center rounded-sm border border-gray-300  bg-white py-1 px-4  shadow-lg"
           >
             New Manufacturer

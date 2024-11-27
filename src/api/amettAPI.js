@@ -5,6 +5,7 @@ const instance = axios.create({
   // baseURL: "https://api.amett.net",
   // baseURL: "https://www.amett.net/api",
   // baseURL: "",
+  withCredentials: true,
 });
 
 export default instance;

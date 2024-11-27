@@ -11,7 +11,7 @@ const AdminHome = () => {
   const [bidsLength, setBidsLength] = useState(0);
   const [quoteRequestsLength, setQuoteRequestsLength] = useState(0);
   const [latestUpdate, setLatestUpdate] = useState(null);
-  const [data, setData] = useState(null);
+  // const [data, setData] = useState(null);
 
   useEffect(() => {
     const fetchAuctions = async () => {
@@ -49,73 +49,73 @@ const AdminHome = () => {
       } catch (error) {}
     };
 
-    const fetchPerformanceSnapshots = async () => {
-      try {
-        const response = await amettAPI.get(`/jobs/performance-snapshots`);
+    // const fetchPerformanceSnapshots = async () => {
+    //   try {
+    //     const response = await amettAPI.get(`/jobs/performance-snapshots`);
 
-        setData({
-          labels: response.data.data.performanceSnapshots.map((el) => {
-            return new Date(el.createdAt).toDateString().split(" ")[1];
-          }),
-          datasets: [
-            {
-              fill: false,
-              label: "Active Auctions",
-              // data: labels.map(() => faker.datatype.number()),
-              data: response.data.data.performanceSnapshots.map((el) => {
-                return el.noOfAuctions;
-              }),
-              // data: 0,
-              // data: labels.map(() => 1),
-              borderColor: "rgb(107, 171, 189)",
-              backgroundColor: "rgba(107, 171, 189,0.5)",
-            },
-            {
-              fill: false,
-              label: "Models",
-              // data: labels.map(() => faker.datatype.number()),
-              // data: 0,
-              data: response.data.data.performanceSnapshots.map((el) => {
-                return el.noOfModels;
-              }),
-              // data: labels.map(() => 1),
-              borderColor: "rgb(225, 97, 98)",
-              backgroundColor: "rgba(225, 97, 98, 0.5)",
-            },
-            {
-              fill: false,
-              label: "Bids",
-              // data: labels.map(() => faker.datatype.number()),
-              data: response.data.data.performanceSnapshots.map((el) => {
-                return el.noOfBids;
-              }),
-              // data: 0,
-              // data: labels.map(() => 1),
-              borderColor: "rgb(243, 206, 178)",
-              backgroundColor: "rgba(243, 206, 178,0.5)",
-            },
-            {
-              fill: false,
-              label: "Quote Requests",
-              data: response.data.data.performanceSnapshots.map((el) => {
-                return el.noOfQuoteRequests;
-              }),
-              // data: labels.map(() => faker.datatype.number()),
-              // data: 0,
-              // data: labels.map(() => 1),
-              borderColor: "rgb(134, 151, 166)",
-              backgroundColor: "rgba(134, 151, 166, 0.5)",
-            },
-          ],
-        });
-      } catch (error) {}
-    };
+    //     setData({
+    //       labels: response.data.data.performanceSnapshots.map((el) => {
+    //         return new Date(el.createdAt).toDateString().split(" ")[1];
+    //       }),
+    //       datasets: [
+    //         {
+    //           fill: false,
+    //           label: "Active Auctions",
+    //           // data: labels.map(() => faker.datatype.number()),
+    //           data: response.data.data.performanceSnapshots.map((el) => {
+    //             return el.noOfAuctions;
+    //           }),
+    //           // data: 0,
+    //           // data: labels.map(() => 1),
+    //           borderColor: "rgb(107, 171, 189)",
+    //           backgroundColor: "rgba(107, 171, 189,0.5)",
+    //         },
+    //         {
+    //           fill: false,
+    //           label: "Models",
+    //           // data: labels.map(() => faker.datatype.number()),
+    //           // data: 0,
+    //           data: response.data.data.performanceSnapshots.map((el) => {
+    //             return el.noOfModels;
+    //           }),
+    //           // data: labels.map(() => 1),
+    //           borderColor: "rgb(225, 97, 98)",
+    //           backgroundColor: "rgba(225, 97, 98, 0.5)",
+    //         },
+    //         {
+    //           fill: false,
+    //           label: "Bids",
+    //           // data: labels.map(() => faker.datatype.number()),
+    //           data: response.data.data.performanceSnapshots.map((el) => {
+    //             return el.noOfBids;
+    //           }),
+    //           // data: 0,
+    //           // data: labels.map(() => 1),
+    //           borderColor: "rgb(243, 206, 178)",
+    //           backgroundColor: "rgba(243, 206, 178,0.5)",
+    //         },
+    //         {
+    //           fill: false,
+    //           label: "Quote Requests",
+    //           data: response.data.data.performanceSnapshots.map((el) => {
+    //             return el.noOfQuoteRequests;
+    //           }),
+    //           // data: labels.map(() => faker.datatype.number()),
+    //           // data: 0,
+    //           // data: labels.map(() => 1),
+    //           borderColor: "rgb(134, 151, 166)",
+    //           backgroundColor: "rgba(134, 151, 166, 0.5)",
+    //         },
+    //       ],
+    //     });
+    //   } catch (error) {}
+    // };
     fetchAuctions();
     fetchModels();
     fetchBids();
     fetchQuoteRequests();
     fetchLatestUpdate();
-    fetchPerformanceSnapshots();
+    // fetchPerformanceSnapshots();
   }, []);
   return (
     <div className="grid grid-cols-5 gap-4">
@@ -182,11 +182,11 @@ const AdminHome = () => {
             
           </div>
         </div> */}
-        {data && (
+        {/* {data && (
           <div className="h-96">
             <Chart data={data} />
           </div>
-        )}
+        )} */}
       </div>
     </div>
   );

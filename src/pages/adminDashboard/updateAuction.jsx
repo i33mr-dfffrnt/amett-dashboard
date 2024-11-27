@@ -112,7 +112,7 @@ const UpdateAuction = () => {
         setCurrentBid(response.data.data.auction.currentBid);
         setStatus(response.data.data.auction.status);
       } catch (error) {
-        navigate("/admin-dashboard/404", { replace: true });
+        navigate("/404", { replace: true });
       }
     };
     fetchAuction();

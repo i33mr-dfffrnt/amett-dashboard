@@ -9,8 +9,6 @@ import SuccessNotification from "../../components/successNotification";
 
 const ServiceTypeForm = () => {
   const [typeName, setTypeName] = useState("");
-  const [imageSrc, setImageSrc] = useState(null);
-  const [previewUri, setPreviewUri] = useState("");
 
   const [isSuccessAlertShown, setSuccessAlertShown] = useState(false);
   const [isErrorAlertShown, setErrorAlertShown] = useState(false);
@@ -21,10 +19,8 @@ const ServiceTypeForm = () => {
     if (typeName.trim() === "") {
       setErrorMessage("Please input collection name");
       return false;
-    } else if (!imageSrc) {
-      setErrorMessage("Please upload an image");
-      return false;
-    } else return true;
+    }
+    return true;
   };
 
   const submit = async () => {
@@ -33,15 +29,7 @@ const ServiceTypeForm = () => {
     setIsLoading(true);
     if (validateForm()) {
       try {
-        var file = new File([previewUri.file], "image.jpg", { type: previewUri.file.type });
-
-        const formData = new FormData();
-        formData.append("image", file);
-        formData.append("name", typeName);
-
-        await amettAPI.post(`/service-types`, formData, {
-          headers: { "Content-type": "multipart/form-date" },
-        });
+        await amettAPI.post(`/service-types`, { name: typeName });
 
         setIsLoading(false);
         setSuccessAlertShown(true);
@@ -54,30 +42,6 @@ const ServiceTypeForm = () => {
       setIsLoading(false);
       setErrorAlertShown(true);
     }
-  };
-
-  function readFile(file) {
-    return new Promise((resolve) => {
-      const reader = new FileReader();
-      reader.addEventListener("load", () => resolve(reader.result), false);
-      reader.readAsDataURL(file);
-    });
-  }
-  const onFileChange = async (e) => {
-    if (e.target.files && e.target.files.length > 0) {
-      const file = e.target.files[0];
-
-      let imageDataUrl = await readFile(file);
-
-      setImageSrc(imageDataUrl);
-    }
-  };
-
-  const showCroppedImage = async (croppedAreaPixels) => {
-    try {
-      const croppedImage = await getCroppedImg(imageSrc, croppedAreaPixels, 0);
-      setPreviewUri(croppedImage);
-    } catch (error) {}
   };
 
   return (
@@ -114,29 +78,6 @@ const ServiceTypeForm = () => {
             value={typeName}
           />
 
-          <h5 className="">Collection Photo*</h5>
-          <input type="file" accept="image/*" onChange={onFileChange} />
-
-          <div className="col-span-5 ">
-            {imageSrc && (
-              <div className="mx-auto max-w-2xl px-4 pt-10 pb-16 sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-2 lg:grid-rows-[auto,auto,1fr] lg:gap-x-8 lg:px-8 lg:pt-8 lg:pb-24">
-                <div>
-                  Modify image
-                  <CustomCropper image={imageSrc} showCroppedImage={showCroppedImage} />
-                </div>
-                <div>
-                  How it will look like:
-                  <div className="flex flex-col items-center  w-full rounded-lg ">
-                    <img
-                      className="h-44 lg:h-72 object-cover bg-white"
-                      src={previewUri.url}
-                      alt=""
-                    />
-                  </div>
-                </div>
-              </div>
-            )}
-          </div>
           <div className="col-span-5 flex justify-center">
             <button
               onClick={(event) => {

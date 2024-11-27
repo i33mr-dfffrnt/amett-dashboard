@@ -29,9 +29,11 @@ const AdminLogin = () => {
     if (validateForm()) {
       try {
         await amettAPI.post(`/auth/login`, { username, password });
+        console.log("success login");
+
         // localStorage.setItem("jwt", response.data.data.token);
         setIsLoading(false);
-        navigate("/admin-dashboard");
+        navigate("/");
       } catch (error) {
         setErrMsg(error.response.data.message);
         setIsLoading(false);
