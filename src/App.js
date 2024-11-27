@@ -16,6 +16,7 @@ import AdminHome from "./pages/adminDashboard/adminHome";
 /* Equipment (Product)*/
 import ManageEquipment from "./pages/adminDashboard/manageEquipment";
 import ManageServices from "./pages/adminDashboard/manageServices";
+import ManageRequests from "./pages/adminDashboard/manageRequests";
 import ModalForm from "./pages/adminDashboard/modelForm";
 import ServiceForm from "./pages/adminDashboard/serviceForm";
 import UpdateModel from "./pages/adminDashboard/updateModel";
@@ -81,6 +82,9 @@ function App() {
 
         <Route path="/">
           <Route path="/admin-dashboard/manage-services" element={<ManageServices />} />
+        </Route>
+        <Route path="/">
+          <Route path="/admin-dashboard/manage-requests" element={<ManageRequests />} />
         </Route>
 
         <Route path="/">

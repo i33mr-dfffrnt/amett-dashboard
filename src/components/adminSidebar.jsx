@@ -41,6 +41,15 @@ const AdminSidebar = () => {
                 <span className="font-semibold oswald-font text-xl ">Services</span>
               </Link>
             </li>
+            <li className="rounded-sm bg-white">
+              <Link
+                to={"/admin-dashboard/manage-requests"}
+                className="flex items-center p-2 space-x-3 rounded-md"
+              >
+                <MdOutlineRequestQuote size={24} />
+                <span className="font-semibold oswald-font text-xl ">Requests</span>
+              </Link>
+            </li>
             {/* <li className="rounded-sm bg-white">
               <Link
                 to={"/admin-dashboard/manage-auctions"}
